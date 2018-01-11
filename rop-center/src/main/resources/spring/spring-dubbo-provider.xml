@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://code.alibabatech.com/schema/dubbo  
+    http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="jmxy-bizcenter"/>
+    <!-- 使用multicast广播注册中心暴露服务地址-->
+    <!-- <dubbo:registry address="multicast://localhost:1234" /> -->
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://${bizcenter.dubbo.registry.address}"/>
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <!--<dubbo:protocol name="dubbo" port="20881"/>-->
+    <dubbo:protocol name="dubbo" port="20881"/>
+
+    <dubbo:service interface="com.commons.api.AdminRemote" ref="adminRemote" protocol="dubbo" timeout="3000"/>
+
+</beans>
